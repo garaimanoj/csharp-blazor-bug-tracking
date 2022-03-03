@@ -11,21 +11,21 @@
     @foreach (var bug in Bugs)
     {
         <tr>
-            <th>@bug.Id</th>
-            <th>@bug.Title</th>
-            <th>@bug.Description</th>
-            <th>@bug.Priority</th>
+            <td>@bug.Id</td>
+            <td>@bug.Title</td>
+            <td>@bug.Description</td>
+            <td>@bug.Priority</td>
         </tr>
     }
 </table>
 @code {
     [Inject]
     public IBugService BugService { get; set; }
-    public IEnumerable<Bug> Bugs { get; set; }
+    public List<Bug> Bugs { get; set; }
 
     protected override void OnInitialized()
     {
-        Bugs = BugService.GetBugs().OrderBy(x => x.Priority);
+        Bugs = (List<Bug>)BugService.GetBugs().OrderBy(x => x.Priority);
         base.OnInitialized();
     }
 }
